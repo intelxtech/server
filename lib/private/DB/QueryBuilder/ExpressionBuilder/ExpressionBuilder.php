@@ -427,11 +427,11 @@ class ExpressionBuilder implements IExpressionBuilder {
 	 *
 	 * @param string $column
 	 * @param mixed $type One of IQueryBuilder::PARAM_*
-	 * @return string
+	 * @return IQueryFunction
 	 */
-	public function castColumn(string $column, $type): string {
-		return (string)(new QueryFunction(
+	public function castColumn(string $column, $type): IQueryFunction {
+		return new QueryFunction(
 			$this->helper->quoteColumnName($column)
-		));
+		);
 	}
 }

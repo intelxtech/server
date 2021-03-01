@@ -434,11 +434,11 @@ interface IExpressionBuilder {
 	 *
 	 * @param string $column
 	 * @param mixed $type One of IQueryBuilder::PARAM_*
-	 * @return string
+	 * @return IQueryFunction
 	 * @since 9.0.0
 	 *
 	 * @psalm-taint-sink sql $column
 	 * @psalm-taint-sink sql $type
 	 */
-	public function castColumn(string $column, $type): string;
+	public function castColumn(string $column, $type): IQueryFunction;
 }

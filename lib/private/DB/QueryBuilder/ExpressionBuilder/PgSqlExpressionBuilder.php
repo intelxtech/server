@@ -26,6 +26,7 @@ namespace OC\DB\QueryBuilder\ExpressionBuilder;
 
 use OC\DB\QueryBuilder\QueryFunction;
 use OCP\DB\QueryBuilder\IQueryBuilder;
+use OCP\DB\QueryBuilder\IQueryFunction;
 
 class PgSqlExpressionBuilder extends ExpressionBuilder {
 
@@ -34,14 +35,14 @@ class PgSqlExpressionBuilder extends ExpressionBuilder {
 	 *
 	 * @param string $column
 	 * @param mixed $type One of IQueryBuilder::PARAM_*
-	 * @return string
+	 * @return IQueryFunction
 	 */
-	public function castColumn($column, $type): string {
+	public function castColumn($column, $type): IQueryFunction {
 		switch ($type) {
 			case IQueryBuilder::PARAM_INT:
-				return (string)(new QueryFunction('CAST(' . $this->helper->quoteColumnName($column) . ' AS INT)'));
+				return new QueryFunction('CAST(' . $this->helper->quoteColumnName($column) . ' AS INT)');
 			case IQueryBuilder::PARAM_STR:
-				return (string)(new QueryFunction('CAST(' . $this->helper->quoteColumnName($column) . ' AS TEXT)'));
+				return new QueryFunction('CAST(' . $this->helper->quoteColumnName($column) . ' AS TEXT)');
 			default:
 				return parent::castColumn($column, $type);
 		}
